@@ -19,15 +19,29 @@ Before you embark on creating tooling its a good idea to define exactly what you
 
 An example based on my current teams needs would be: 
 
-- [ ] GIT baseed the source of truth for code
-- [ ] Liquid folder ( `/src` )
-- [ ] SCSS compilation
-- [ ] Javascript ( ES6+) no jQuery
-- [ ] React Compilation
-- [ ] Live reloading of preview themes
-- [ ] Fast setup
-- [ ] Salient starting points
-- [ ] Build and deploy tools for astaging store and one or many regional live stores
+- [ ] 1. GIT baseed the source of truth for code
+- [X] 2. theme folder ( `/src/theme` )
+- [ ] 3. SCSS compilation & minification
+- [ ] 4. Javascript ( ES6+) + React with common copliation and chunking (no jQuery blergh )
+- [ ] 5. Live push of theme files reloading of dev preview themes
+- [ ] 6. Fast setup and project kick off
+- [ ] 7. Salient starting points
+- [ ] 8. Build and deploy tools for staging store/s and one or many regional live stores
+
+Right so once you have mapped out your needs its time to have a team discussion and define how you connect all the dots.
+Taking that list of needs and using the experience you have at your team disposal, possibly have a bit of a research and hack session surrounding different available tools in the wild.
+
+
+## Map out the tools to the goals and POC them
+
+- [X] 1. Github
+- [X] 2. Repo (`/src/theme`) 
+- [X] 3. SCSS compilation ( `webpack + Nodesass + postcss = /src/styles/theme.scss`)
+- [X] 4. Javascript ( ES6+) + React with common copliation and chunking (no jQuery blergh )
+- [ ] 5. Live push of theme files reloading of dev preview themes
+- [ ] 6. Fast setup and project kick off
+- [ ] 7. Salient starting points
+- [ ] 8. Build and deploy tools for staging store/s and one or many regional live stores
 
 
 
