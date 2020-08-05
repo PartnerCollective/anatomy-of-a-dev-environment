@@ -38,10 +38,21 @@ Taking that list of needs and using the experience you have at your team disposa
 - [X] 2. Repo (`/src/theme`) 
 - [X] 3. SCSS compilation ( `webpack + Nodesass + postcss = /src/styles/theme.scss`)
 - [X] 4. Javascript ( ES6+) + React with common copliation and chunking (no jQuery blergh )
-- [ ] 5. Live push of theme files reloading of dev preview themes
-- [ ] 6. Fast setup and project kick off
-- [ ] 7. Salient starting points
-- [ ] 8. Build and deploy tools for staging store/s and one or many regional live stores
+- [X] 5.1 `ThemeKit` for local devleopment pushes
+- [X] 5.2 Reloading `Browsersync` 
+- [ ] 6. Fast setup and project kick off `build a cli once later?`
+- [ ] 7. Salient starting points `any startin theme you choose`
+- [ ] 8. Build and deploy tools `handle this later once the rest is working`
+
+Right so from that we have a rough set of tools these are not extensive review the [suggested tools](./suggestedtools.md) doc for other options.
+
+
+## Fitting the puzzle pieces together
+
+[Reference Folder](./examples/leigh-b/)
+
+We are gonna start off by creating our base folder and placeholders. 
+
 
 
 
