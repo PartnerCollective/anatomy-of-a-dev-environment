@@ -37,7 +37,7 @@ Taking that list of needs and using the experience you have at your team disposa
 - [X] 1. Github
 - [X] 2. Repo (`/src/theme`) 
 - [X] 3. SCSS compilation ( `webpack + Nodesass + postcss = /src/styles/theme.scss`)
-- [X] 4. Javascript ( ES6+) + React with common copliation and chunking (no jQuery blergh )
+- [X] 4. Javascript ( ES6+) ( `webpack + terser + eslint ( optional typescript / react )`)
 - [X] 5.1 `ThemeKit` for local devleopment pushes
 - [X] 5.2 Reloading `Browsersync` 
 - [ ] 6. Fast setup and project kick off `build a cli once later?`
@@ -45,13 +45,45 @@ Taking that list of needs and using the experience you have at your team disposa
 - [ ] 8. Build and deploy tools `handle this later once the rest is working`
 
 Right so from that we have a rough set of tools these are not extensive review the [suggested tools](./suggestedtools.md) doc for other options.
+This set of requirements may be drastically different to what you require, tweak what you need and revise to only that to start off with, next up we are going to look at my teams requirements. 
 
 
 ## Fitting the puzzle pieces together
 
 [Reference Folder](./examples/leigh-b/)
 
-We are gonna start off by creating our base folder and placeholders. 
+We are gonna start off by creating our base folder at `./examples/leigh-b/` this is the folder that we would commit to git with all the tooling in place along side the theme code. 
+This means that any of our team can clone install and carry on or multiple of us can push in along side each other on our own branches. 
+
+1. Init ( `git init && npm init`)
+This will initialize git and npm ( adding a package.json) 
+
+2. Lets create our initial folder structure 
+
+```
+/ 
+src /
+------| styles/
+------|------| index.scss
+------| scripts/
+------|------| index.js
+------| theme/
+------|------| {... all the shopify folders and sub liquid files required}
+```
+
+In the example I have just dropped a copy of debut into my theme folder to get started from, you may have your own starter or favored theme to start from. 
+
+3. Environment variables
+There are a few ways to do this but in our case as a team we would prefer to use a `.env` file per user. As we dont want to commit those for security and best practice reasons we will leave a `sample.env` file in the root.
+
+Along with any user specific config this will include our API credentials and theme ID/s which will be used with theme kit and our compilers.
+
+4. Compilers
+
+5. Code Quality
+
+
+
 
 
 

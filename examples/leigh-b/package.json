@@ -1,0 +1,15 @@
+{
+  "name": "dev-tool-kit",
+  "version": "1.0.0",
+  "description": "A local development kit for shopify themes. ",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browsersync": "0.0.1-security",
+    "webpack": "^4.44.1"
+  }
+}
