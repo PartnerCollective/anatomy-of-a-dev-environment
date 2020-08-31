@@ -4,7 +4,7 @@ const common = require('./webpack.common')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 /**
- * Minified Production Builds go here
+ * Minified Production Build
  */
 const chunks = Object.assign({}, {
   cacheGroups: {
@@ -18,10 +18,8 @@ const chunks = Object.assign({}, {
 
 module.exports = merge(common, {
   mode: 'production',
-  // devtool: 'source-map',
   output: {
     path: path.resolve(__dirname, './src/theme/assets/'),
-    // filename: '[name].min.js'
   },
   optimization: {
     minimize: true,

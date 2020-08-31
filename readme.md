@@ -172,6 +172,8 @@ Now that we have the heavy lifting out of the way our files are compiling and be
 You can find out more about [ThemeKit here](https://shopify.github.io/themekit/) 
 For this example you will need this installed and running on your CLI. 
 
+To find out more about the node package you can find out more information here [ThemeKit NPM](https://www.npmjs.com/package/@shopify/themekit)
+
 `NOTETOSELF: Possibly use the node module it is more portable and easy to install. `
 
 
