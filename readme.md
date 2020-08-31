@@ -36,8 +36,9 @@ Taking that list of needs and using the experience you have at your team disposa
 
 - [X] 1. Github
 - [X] 2. Repo (`/src/theme`) 
-- [X] 3. SCSS compilation ( `webpack + Nodesass + postcss = /src/styles/theme.scss`)
-- [X] 4. Javascript ( ES6+) ( `webpack + terser + eslint ( optional typescript / react )`)
+- [X] 4. Compilation (`webpack`)
+- [X] 4.1 SCSS compilation ( `webpack + Nodesass + postcss = /src/styles/theme.scss`)
+- [X] 4.2 Javascript ( ES6+) ( `webpack + terser + eslint ( optional typescript / react )`)
 - [X] 5.1 `ThemeKit` for local devleopment pushes
 - [X] 5.2 Reloading `Browsersync` 
 - [ ] 6. Fast setup and project kick off `build a cli once later?`
@@ -50,7 +51,7 @@ This set of requirements may be drastically different to what you require, tweak
 
 ## Fitting the puzzle pieces together
 
-[Reference Folder](./examples/leigh-b/)
+[Reference Folder](./examples/webpack-js-css-themekit-browsersync/)
 
 We are gonna start off by creating our base folder at `./examples/leigh-b/` this is the folder that we would commit to git with all the tooling in place along side the theme code. 
 This means that any of our team can clone install and carry on or multiple of us can push in along side each other on our own branches. 
@@ -78,7 +79,23 @@ There are a few ways to do this but in our case as a team we would prefer to use
 
 Along with any user specific config this will include our API credentials and theme ID/s which will be used with theme kit and our compilers.
 
+We will continue to wire that up a little later on. 
+
 4. Compilers
+
+There are task runners and compilers of many forms and varieties. From the well know gulp and grunt orchestrating different compilation steps, this a great and accessible approach and used by many partners. However as I am going to use node to piece most of this together, we have npm cripts at our disposal so we will drop gulp and grunt and just use scripts to tie everything up.
+
+In this case we will be using webpack for both our JS and SCSS compilation. This will allow us to easily split entries to performance tune in the future.
+Webpack has a mature and comprehensive plugin ecosystem for example we will probably need some auto prefixing or need the compilation to be aware of the supported browsers that your team works to. 
+We can do all of that in one tool which while not the simplest to configure is robust and well tested in industry. 
+
+There are other options like rollup or parcel out there, but for this option we will use webpack and you can adapt as you need. 
+
+Want to learn more about webpack? 
+you can find the [Webpack docs here](https://webpack.js.org/) however note this is designed for a more common local development flow such as one would use for a modern framework such as React or Vue, we will be using a subset of its full capabilities to work around the Shopify local/online requirements. 
+
+
+
 
 5. Code Quality
 
