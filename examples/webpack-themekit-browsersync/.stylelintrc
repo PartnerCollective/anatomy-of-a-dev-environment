@@ -1,0 +1,10 @@
+{
+  "ignoreFiles": [
+      "src/theme/**/*.scss"
+  ],
+  "rules": {
+    "block-no-empty": null,
+    "color-no-invalid-hex": true,
+    "max-empty-lines": 2
+  }
+}

@@ -1,0 +1,79 @@
+{
+    "extends": [
+      "eslint:recommended"
+    ],
+    "env": {
+      "browser": true,
+      "commonjs": true,
+      "es6": true,
+      "node": true,
+      "jest": true
+    },
+    "parserOptions": {
+      "ecmaFeatures": {
+        "jsx": true
+      },
+      "ecmaVersion": 2018,
+      "sourceType": "module",
+      "project": []
+    },
+    "plugins": [
+    ],
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    },
+    "rules": {
+      "no-extra-semi": "error",
+      "no-dupe-keys": "error",
+      "no-dupe-args": "error",
+      "no-debugger": "error",
+      "no-duplicate-case": "error",
+      "no-console": [
+        1,
+        {
+          "allow": [
+            "warn",
+            "error",
+            "info"
+          ]
+        }
+      ],
+      "no-undefined": "error",
+      "quotes": [
+        "error",
+        "single"
+      ],
+      "camelcase": 1,
+      "max-params": [
+        "error",
+        5
+      ],
+      "no-unused-vars": "warn",
+      "indent": [
+        "error",
+        2,
+        {
+          "SwitchCase": 1
+        }
+      ],
+      "no-empty": "error",
+      "no-use-before-define": "error",
+      "prefer-const": "error",
+      "no-unreachable": "error",
+      "valid-typeof": "error",
+      "eqeqeq": "error",
+      "no-var": "error",
+      "react/prop-types": 0
+    },
+    "overrides": [
+      {
+        "files": [
+          "*.js"
+        ],
+        "rules": {
+        }
+      }
+    ]
+  }
