@@ -1,0 +1,8 @@
+{
+  "port": 3000,
+  "scriptLocation": "head",
+  "reloadDelay": 1000,
+  "notifyFile": "./src/theme/tmp/theme.update",
+  "shop": "anatomy-of-a-dev-environment.myshopify.com",
+  "themeId": "110334509218"
+}

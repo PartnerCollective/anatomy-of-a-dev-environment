@@ -4,11 +4,13 @@
   "description": "A local development kit for shopify themes. ",
   "main": "index.js",
   "scripts": {
-    "dev": "npm-run-all --parallel watch:assets",
-    "build": "",
-    "deploy": "",
+    "dev": "npm-run-all --parallel watch:assets theme:watch browsersync",
+    "build": "npm run build:assets",
+    "deploy": "npm run build:assets && cd src/theme && theme deploy",
+    "theme:watch": "cd src/theme && theme watch --notify=tmp/theme.update",
     "watch:assets": "webpack --watch --env=dev --config webpack.dev.js",
-    "build:assets": "webpack --progress --config webpack.prod.js"
+    "build:assets": "webpack --progress --config webpack.prod.js",
+    "browsersync": "browsersync-themekit"
   },
   "author": "",
   "license": "ISC",
@@ -42,5 +44,8 @@
   "browserslist": [
     "last 2 version",
     "> 3%"
-  ]
+  ],
+  "dependencies": {
+    "browsersync-themekit": "0.0.10"
+  }
 }

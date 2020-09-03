@@ -1,6 +1,6 @@
 
 const test = () => {
-  console.log('Yo!!! what up')
+  return console.log('Yes I am some modern JS')
 }
 
 

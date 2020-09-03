@@ -24,9 +24,10 @@ An example based on my current teams needs would be:
 - [ ] 3. SCSS compilation & minification
 - [ ] 4. Javascript ( ES6+) + React with common copliation and chunking (no jQuery blergh )
 - [ ] 5. Live push of theme files reloading of dev preview themes
-- [ ] 6. Fast setup and project kick off
-- [ ] 7. Salient starting points
-- [ ] 8. Build and deploy tools for staging store/s and one or many regional live stores
+- [ ] 6. Start a dev environment
+- [ ] 7. Fast setup and project kick off
+- [ ] 8. Salient starting points
+- [ ] 9. Build and deploy tools for staging store/s and one or many regional live stores
 
 Right so once you have mapped out your needs its time to have a team discussion and define how you connect all the dots.
 Taking that list of needs and using the experience you have at your team disposal, possibly have a bit of a research and hack session surrounding different available tools in the wild.
@@ -41,9 +42,10 @@ Taking that list of needs and using the experience you have at your team disposa
 - [X] 4.2 Javascript ( ES6+) ( `webpack + terser + eslint ( optional typescript / react )`)
 - [X] 5.1 `ThemeKit` for local devleopment pushes
 - [X] 5.2 Reloading `Browsersync` 
-- [ ] 6. Fast setup and project kick off `build a cli once later?`
-- [ ] 7. Salient starting points `any startin theme you choose`
-- [ ] 8. Build and deploy tools `handle this later once the rest is working`
+- [X] 6. Single terminal command `npm run dev` to start it up
+- [ ] 7. Fast setup and project kick off `build a cli once later?`
+- [ ] 8. Salient starting points `any startin theme you choose`
+- [ ] 9. Build and deploy tools `handle this later once the rest is working`
 
 Right so from that we have a rough set of tools these are not extensive review the [suggested tools](./suggestedtools.md) doc for other options.
 This set of requirements may be drastically different to what you require, tweak what you need and revise to only that to start off with, next up we are going to look at my teams requirements. 
@@ -77,11 +79,12 @@ In the example I have just dropped a copy of debut into my theme folder to get s
 This is obviously not what you would do, more often than not you would have a default starting point for theme development, however this show cases how you could take on external code and work on it through a build kit of your preference. 
 
 # 3. Environment variables
-There are a few ways to do this but in our case as a team we would prefer to use a `.env` file per user. As we dont want to commit those for security and best practice reasons we will leave a `sample.env` file in the root.
+While my team prefers to use `.env` files to handle most config. For ease of use and to easily allow us to use theme cit via the CLI we will stick with a config.yml that is git ignored. We will use this in conjunction with a browser-sync config wrapper. In the real world seperating this and using the node wrappers allows alot more flexibility to use a user level `.env`
 
-Along with any user specific config this will include our API credentials and theme ID/s which will be used with theme kit and our compilers.
+In this folder we have two configs, `/src/theme/config.yml` - @todo move to root and tie up with conf flag
+and `browsersync-themekit-config.json`
 
-We will continue to wire that up a little later on. 
+I will do an entire extension to this concept in the future talking about handling envs for a larger team, 
 
 # 4. Compilers ( Webpack with a number of plugins )
 
@@ -167,14 +170,94 @@ Two critical scripts, `build:assets` & `watch:assets` will run webpack with our 
 # 5. ThemeKit & Live reloading
 Now that we have the heavy lifting out of the way our files are compiling and being primed for both dev and production. Lets get the rest of our critical tooling into place. 
 
-[ThemeKit](https://shopify.github.io/themekit/) is Shopify's theme deployment and local connect tooling. It comes in two forms. A CLI for ease of use we will use that in this case. There is also a node package if you need more programatic handling, my team more commonly use this to orchestrate processes. 
+[ThemeKit](https://shopify.github.io/themekit/) is Shopify's theme deployment and local connect tooling. It comes in two forms. A CLI for ease of use we will use that in this case. There is also a node package if you need more programatic handling, my team more commonly use this to orchestrate processes. Personally the node package is a far more robust and portable solution as it will run on pretty much all machines and dosnt require a seperate installation. 
 
 You can find out more about [ThemeKit here](https://shopify.github.io/themekit/) 
 For this example you will need this installed and running on your CLI. 
 
 To find out more about the node package you can find out more information here [ThemeKit NPM](https://www.npmjs.com/package/@shopify/themekit)
 
-`NOTETOSELF: Possibly use the node module it is more portable and easy to install. `
+
+## Install themkit CLI 
+
+Installation instructions are [available here](https://shopify.github.io/themekit/) follow the directions for your OS. Test that theme kit is availabe `theme - h` in your terminal of choice. 
+
+Note if you are using gitbash in vscode on windows you will need to close and reopen vscode once instalattion via powershell has completed. 
+
+## ThemeKit Environment & Setup
+Once you are installed lets load a script to start a watch. First off we need a development store with a private app to allow connection, you can find this documented on the themekit page. 
+
+Now create a config ( as stated in env vars ) we are goiung to use the defacto `config.yml` for this and leave a `sample.config.yml` file in the repo for people to start from. 
+
+The way you use this forward is up to you there are better ways to handle multiple environments and env vars that bridge outside of themkit.
+
+**Creating a start script**
+Now that we have a config file setup with store theme id and a private app password locally. We can add a script to npm scripts in `package.json` to start the theme watch. 
+
+*package.json*
+```
+{
+    "scripts": {
+        "theme:watch":"cd src/theme && theme watch --notify=tmp/theme.update"
+    }
+}
+
+```
+This will cd into the folder and start the watch and notify when run `npm run theme:watch` - @todo move config back to root and adjust.
+
+## Browsersync
+We will use browser sync to proxy a shopify theme ( via preview ID ) and reload it whenever themekit modifies the notify file. 
+There is a wrapper I wrote along side this instruction set [browserssync-themekit](https://www.npmjs.com/package/browsersync-themekit) this will install browsersync and adcd a cli with preview id handling. 
+
+1. `npm install browsersync-themekit --save-dev` - install the deps 
+2. `npx browsersync-themekit -n` - execute and create a config, this will ask you a set of questions enter your shop and themeid
+3. Do not start the browsersync the first time you run it. 
+
+This will create a `browsersync-themekit-config.json` file in the folder. This is where shared environment varialbes would be great. 
+
+**Creating the start script**
+We need an npm script to start this process that we can call with `npm run browsersync` so lets create it.
+
+*package.json*
+```
+{
+    "scripts": {
+        "browsersync": "browsersync-themekit"
+    }
+}
+
+```
+
+# Start Dev
+To simplify the startup of our dev environment we want a single command we can run to get it all working along side each other. 
+
+At this point we have everything we need to get going Three scripts that all work with each other:
+
+1. `npm run theme:watch` -> starts theme kit -> and notify when uploads
+2. `npm run watch:assets` -> starts compiling JS and CSS -> outputs to the asstes folder which will be pushjed to the stores assets\
+3. `npm run browsersync` -> starts a proxy to the store live reloading on changes to the notify file
+
+## npm run dev
+You theoretically at this point could start all of these in a new terminal and it would work. But lets make our lives easier.
+There is a package `npm-run-all` that allows us to run multiple npm scripts in paralell in a sxingle terminal. 
+Lets create a script to start it all up. 
+
+*package.json*
+```
+{
+    "scripts": {
+        "dev": "npm-run-all --parallel watch:assets theme:watch browsersync",
+    }
+}
+
+```
+
+
+thats it we can now start watch, compile and livereload on changes with the comman `npm run dev`
+
+
+
+
 
 
 
